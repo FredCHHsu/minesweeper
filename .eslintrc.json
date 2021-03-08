@@ -34,7 +34,8 @@
     "generator-star-spacing": ["error", {"before": false, "after": true}],
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
     "react/jsx-closing-bracket-location": 1,
-    "react/jsx-closing-tag-location": 1
+    "react/jsx-closing-tag-location": 1,
+    "no-unused-vars": "warn"
   },
   "settings": {
     "import/resolver": {
