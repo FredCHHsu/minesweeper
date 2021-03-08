@@ -1,14 +1,21 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import PropTypes from 'prop-types'
 
+import { GameState } from '../App'
+import ACTIONS from '../actions'
 import Cell from './Cell'
 
-import './game.scss'
+import './board.scss'
 
-const Board = ({ row = 10, col = 10 }) => {
+const Board = ({ row = 10, col = 10, onReveal }) => {
+  const { state, dispatch } = useContext(GameState)
+  console.log(state)
   const handleReveal = useCallback((row, col) => () => {
-    console.log(`reveal ${row} ${col}`)
-  }, [])
+    dispatch({
+      type: ACTIONS.reveal,
+      payload: { row, col },
+    })
+  }, [dispatch])
 
   return (
     <div className="board-base">
@@ -18,6 +25,8 @@ const Board = ({ row = 10, col = 10 }) => {
             <Cell
               key={`cell-${i}-${j}`}
               onClick={handleReveal(i, j)}
+              isRevealed={false}
+              content={''}
             />
           ))}
         </div>
@@ -29,6 +38,7 @@ const Board = ({ row = 10, col = 10 }) => {
 Board.propTypes = {
   row: PropTypes.number,
   col: PropTypes.number,
+  onReveal: PropTypes.func,
 }
 
 export default Board

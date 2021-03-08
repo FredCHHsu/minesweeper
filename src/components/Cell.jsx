@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './game.scss'
+import './board.scss'
 
 const Cell = ({ isRevealed, content, onClick }) => {
   return (
