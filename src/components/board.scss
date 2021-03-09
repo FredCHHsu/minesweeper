@@ -2,9 +2,11 @@ $grid-size: 30px;
 
 .board-base {
   display: inline-block;
+
   .board-row {
     display: flex;
   }
+
   .board-cell {
     display: inline-block;
     border: 1px solid #fff;
@@ -16,6 +18,11 @@ $grid-size: 30px;
     font-size: $grid-size / 2;
     line-height: $grid-size;
     cursor: pointer;
+
+    &.-revealed {
+      background-color: #eee;
+    }
+
     &:hover {
       transition: all 0.5 ease-in;
       opacity: 0.5;
