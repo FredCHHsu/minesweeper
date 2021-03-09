@@ -2,7 +2,8 @@ import React, { useCallback, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { GameState } from '../App'
-import { ACTIONS } from '../actions'
+import { reveal } from '../actions'
+
 import Cell from './Cell'
 
 import './board.scss'
@@ -10,14 +11,13 @@ import './board.scss'
 const Board = () => {
   const { state, dispatch } = useContext(GameState)
 
-  const { board } = state
+  const { board, isGameOver } = state
 
   const handleReveal = useCallback((row, col) => () => {
-    dispatch({
-      type: ACTIONS.reveal,
-      payload: { row, col },
-    })
-  }, [dispatch])
+    if (board[row][col].isRevealed) return
+    if (isGameOver) return
+    dispatch(reveal(row, col))
+  }, [dispatch, board, isGameOver])
 
   return (
     <div className="board-base">

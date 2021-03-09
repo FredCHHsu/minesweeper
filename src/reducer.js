@@ -1,8 +1,16 @@
 import { ACTIONS } from './actions'
 
-const SYMBOL_MINES = 'X'
+export const SYMBOL_MINES = 'X'
 
-export default function reducer(state, action) {
+export const initialState = {
+  board: null,
+  isGameOver: false,
+  isWin: false,
+  revealedCount: 0,
+  totalCell: 0,
+}
+
+export function reducer(state, action) {
   const { type, payload } = action
 
   switch (type) {
@@ -12,15 +20,43 @@ export default function reducer(state, action) {
       return {
         ...state,
         board,
+        totalMines,
+        totalCell: row * col,
       }
     }
     case ACTIONS.reveal: {
       const { row, col } = payload
-      const { board } = state
+      const { board, revealedCount, totalMines, totalCell } = state
       board[row][col].isRevealed = true
+      const nextRevealedCount = revealedCount + 1
+
+      // check loss
+      if (board[row][col].content === SYMBOL_MINES) {
+        console.log('Loss')
+        return {
+          ...state,
+          board,
+          revealedCount: nextRevealedCount,
+          isGameOver: true,
+        }
+      }
+
+      // check win
+      if (nextRevealedCount + totalMines === totalCell) {
+        console.log('Win')
+        return {
+          ...state,
+          board,
+          revealedCount: nextRevealedCount,
+          isGameOver: true,
+          isWin: true,
+        }
+      }
+
       return {
         ...state,
         board,
+        revealedCount: nextRevealedCount,
       }
     }
     default:

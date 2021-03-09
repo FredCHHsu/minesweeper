@@ -1,15 +1,11 @@
 import React, { useReducer, createContext, useEffect } from 'react'
 
 import { initialize } from './actions'
-import reducer from './reducer'
+import { reducer, initialState } from './reducer'
 
 import Board from './components/Board'
 
 import './App.scss'
-
-const initialState = {
-  board: null,
-}
 
 export const GameState = createContext()
 

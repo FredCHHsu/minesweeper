@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
+import { SYMBOL_MINES } from '../reducer'
+
 import './board.scss'
 
 const Cell = ({ isRevealed, content, onClick }) => {
@@ -9,6 +11,7 @@ const Cell = ({ isRevealed, content, onClick }) => {
     <div
       className={clsx('board-cell', {
         '-revealed': isRevealed,
+        '-has-mines': content === SYMBOL_MINES,
       })}
       onClick={onClick}
     >
