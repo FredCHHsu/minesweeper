@@ -6,7 +6,7 @@ import { reveal } from '../actions'
 
 import Cell from './Cell'
 
-import './board.scss'
+import './Board.scss'
 
 const Board = () => {
   const { state, dispatch } = useContext(GameState)

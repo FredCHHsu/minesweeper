@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import { SYMBOL_MINES } from '../reducer'
 
-import './board.scss'
+import './Board.scss'
 
 const Cell = ({ isRevealed, content, onClick }) => {
   return (

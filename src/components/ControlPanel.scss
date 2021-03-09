@@ -1,0 +1,23 @@
+.control-panel {
+  display: flex;
+  margin: 0 auto;
+  padding: 24px 0;
+  max-width: 320px;
+  justify-content: space-between;
+  align-items: center;
+
+  > .game-status {
+    font-weight: bold;
+    color: #500;
+    &.-win {
+      color: #050;
+    }
+  }
+
+  > .reset-button {
+    padding: 8px;
+    &:focus {
+      outline: none;
+    }
+  }
+}

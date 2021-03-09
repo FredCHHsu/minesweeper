@@ -7,7 +7,10 @@ export const initialState = {
   isGameOver: false,
   isWin: false,
   revealedCount: 0,
-  totalCell: 0,
+  row: undefined,
+  col: undefined,
+  totalMines: undefined,
+  totalCell: undefined,
 }
 
 export function reducer(state, action) {
@@ -18,8 +21,10 @@ export function reducer(state, action) {
       const { row, col, totalMines } = payload
       const board = createBoard(row, col, totalMines)
       return {
-        ...state,
+        ...initialState,
         board,
+        row,
+        col,
         totalMines,
         totalCell: row * col,
       }
@@ -57,6 +62,17 @@ export function reducer(state, action) {
         ...state,
         board,
         revealedCount: nextRevealedCount,
+      }
+    }
+    case ACTIONS.reset: {
+      const { row, col, totalMines } = state
+      const board = createBoard(row, col, totalMines)
+      return {
+        ...state,
+        board,
+        isGameOver: false,
+        isWin: false,
+        revealedCount: 0,
       }
     }
     default:

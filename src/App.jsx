@@ -4,6 +4,7 @@ import { initialize } from './actions'
 import { reducer, initialState } from './reducer'
 
 import Board from './components/Board'
+import ControlPanel from './components/ControlPanel'
 
 import './App.scss'
 
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <GameState.Provider value={{ state, dispatch }}>
+        <ControlPanel />
         <Board />
       </GameState.Provider>
     </div>
