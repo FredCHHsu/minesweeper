@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 
 import './board.scss'
 
 const Cell = ({ isRevealed, content, onClick }) => {
   return (
     <div
-      className="board-cell"
+      className={clsx('board-cell', {
+        '-revealed': isRevealed,
+      })}
       onClick={onClick}
     >
       {isRevealed ? content : ''}

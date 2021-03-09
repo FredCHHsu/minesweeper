@@ -10,7 +10,7 @@ import './board.scss'
 const Board = () => {
   const { state, dispatch } = useContext(GameState)
 
-  const { map } = state
+  const { board } = state
 
   const handleReveal = useCallback((row, col) => () => {
     dispatch({
@@ -21,19 +21,18 @@ const Board = () => {
 
   return (
     <div className="board-base">
-    {map &&
-      map.map((row, i) => (
-        <div key={`row-${i}`} className="board-row">
-          {row.map((col, j) => (
-            <Cell
-              key={`cell-${i}-${j}`}
-              onClick={handleReveal(i, j)}
-              isRevealed={map[i][j].isRevealed}
-              content={map[i][j].content}
-            />
-          ))}
-        </div>
-      ))}
+    {board && board.map((row, i) => (
+      <div key={`row-${i}`} className="board-row">
+        {row.map((col, j) => (
+          <Cell
+            key={`cell-${i}-${j}`}
+            onClick={handleReveal(i, j)}
+            isRevealed={board[i][j].isRevealed}
+            content={board[i][j].content}
+          />
+        ))}
+      </div>
+    ))}
     </div>
   )
 }

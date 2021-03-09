@@ -8,7 +8,7 @@ import Board from './components/Board'
 import './App.scss'
 
 const initialState = {
-  map: null,
+  board: null,
 }
 
 export const GameState = createContext()
