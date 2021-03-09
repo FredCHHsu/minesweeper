@@ -148,6 +148,9 @@ function revealNeighbors(board, row, col) {
       if (!board[i][j].isRevealed) {
         board[i][j].isRevealed = true
         count++
+        if (board[i][j].content === 0) {
+          count += revealNeighbors(board, i, j)
+        }
       }
     }
   }
