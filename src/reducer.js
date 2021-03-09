@@ -32,15 +32,31 @@ export function reducer(state, action) {
     case ACTIONS.reveal: {
       const { row, col } = payload
       const { board, revealedCount, totalMines, totalCell } = state
-      board[row][col].isRevealed = true
-      const nextRevealedCount = revealedCount + 1
+
+      let nextBoard = JSON.parse(JSON.stringify(board))
+
+      // first click never been mines
+      if (revealedCount === 0) {
+        while (nextBoard[row][col].content === SYMBOL_MINES) {
+          nextBoard = createBoard(state.row, state.col, totalMines)
+        }
+      }
+
+      // reveal
+      nextBoard[row][col].isRevealed = true
+      let nextRevealedCount = revealedCount + 1
+
+      // no adjacent mine, loop neighbors
+      if (nextBoard[row][col].content === 0) {
+        nextRevealedCount += revealNeighbors(nextBoard, row, col)
+      }
 
       // check loss
-      if (board[row][col].content === SYMBOL_MINES) {
+      if (nextBoard[row][col].content === SYMBOL_MINES) {
         console.log('Loss')
         return {
           ...state,
-          board,
+          board: nextBoard,
           revealedCount: nextRevealedCount,
           isGameOver: true,
         }
@@ -51,7 +67,7 @@ export function reducer(state, action) {
         console.log('Win')
         return {
           ...state,
-          board,
+          board: nextBoard,
           revealedCount: nextRevealedCount,
           isGameOver: true,
           isWin: true,
@@ -60,7 +76,7 @@ export function reducer(state, action) {
 
       return {
         ...state,
-        board,
+        board: nextBoard,
         revealedCount: nextRevealedCount,
       }
     }
@@ -119,4 +135,21 @@ function createBoard(row, col, totalMines) {
     }
   }
   return board
+}
+
+function revealNeighbors(board, row, col) {
+  let count = 0
+  const boardRow = board.length
+  const boardCol = board[0].length
+  for (let i = row - 1; i <= row + 1; i++) {
+    for (let j = col - 1; j <= col + 1; j++) {
+      const isOutOfBoard = i < 0 || j < 0 || i >= boardRow || j >= boardCol
+      if (isOutOfBoard) continue
+      if (!board[i][j].isRevealed) {
+        board[i][j].isRevealed = true
+        count++
+      }
+    }
+  }
+  return count
 }

@@ -15,7 +15,7 @@ const Cell = ({ isRevealed, content, onClick }) => {
       })}
       onClick={onClick}
     >
-      {isRevealed ? content : ''}
+      {isRevealed && content ? content : ''}
     </div>
   )
 }
