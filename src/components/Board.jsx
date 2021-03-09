@@ -2,14 +2,16 @@ import React, { useCallback, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { GameState } from '../App'
-import ACTIONS from '../actions'
+import { ACTIONS } from '../actions'
 import Cell from './Cell'
 
 import './board.scss'
 
-const Board = ({ row = 10, col = 10, onReveal }) => {
+const Board = () => {
   const { state, dispatch } = useContext(GameState)
-  console.log(state)
+
+  const { map } = state
+
   const handleReveal = useCallback((row, col) => () => {
     dispatch({
       type: ACTIONS.reveal,
@@ -19,14 +21,15 @@ const Board = ({ row = 10, col = 10, onReveal }) => {
 
   return (
     <div className="board-base">
-      {Array.from({ length: row }).map((_, i) => (
+    {map &&
+      map.map((row, i) => (
         <div key={`row-${i}`} className="board-row">
-          {Array.from({ length: col }).map((__, j) => (
+          {row.map((col, j) => (
             <Cell
               key={`cell-${i}-${j}`}
               onClick={handleReveal(i, j)}
               isRevealed={false}
-              content={''}
+              content={map[i][j]}
             />
           ))}
         </div>

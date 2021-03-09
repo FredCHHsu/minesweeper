@@ -16,7 +16,7 @@ const Cell = ({ isRevealed, content, onClick }) => {
 
 Cell.propTypes = {
   isRevealed: PropTypes.bool,
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onClick: PropTypes.func,
 }
 
