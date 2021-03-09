@@ -28,8 +28,8 @@ const Board = () => {
             <Cell
               key={`cell-${i}-${j}`}
               onClick={handleReveal(i, j)}
-              isRevealed={false}
-              content={map[i][j]}
+              isRevealed={map[i][j].isRevealed}
+              content={map[i][j].content}
             />
           ))}
         </div>
