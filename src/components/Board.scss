@@ -1,0 +1,36 @@
+$grid-size: 30px;
+
+.board-base {
+  display: inline-block;
+
+  .board-row {
+    display: flex;
+  }
+
+  .board-cell {
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    background-color: #ccc;
+    width: $grid-size;
+    height: $grid-size;
+    text-align: center;
+    font-size: $grid-size / 2;
+    line-height: $grid-size;
+    cursor: pointer;
+
+    &.-revealed {
+      background-color: #eee;
+    }
+
+    &.-has-mines {
+      color: #c00;
+      font-weight: bold;
+    }
+
+    &:hover {
+      transition: all 0.5 ease-in;
+      opacity: 0.5;
+    }
+  }
+}
