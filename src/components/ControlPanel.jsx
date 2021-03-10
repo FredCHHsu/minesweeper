@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react'
 import clsx from 'clsx'
 
 import { GameState } from '../App'
-import { initialize, reset } from '../actions'
+import { reset } from '../actions'
 
 import './ControlPanel.scss'
 
